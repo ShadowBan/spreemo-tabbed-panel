@@ -1,0 +1,74 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="sp-tabbed-panel">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid black;
+        border-radius: 8px;
+      }
+
+      #tabs {
+        background: transparent linear-gradient(to top, #423e81, #6462ae) repeat scroll 0 0;
+        color: white;
+      }
+
+      .page {
+        padding: 10px;
+      }
+
+
+    </style>
+    
+    <paper-tabs id="tabs" selected="{{selected}}">
+      <dom-repeat items="{{tabs}}" as="tab">
+        <template>
+          <paper-tab> {{tab}} </paper-tab> 
+        </template>
+      </dom-repeat>
+    </paper-tabs>
+
+    <iron-pages id="pages" selected="{{selected}}">
+      <dom-repeat items="{{tabs}}" as="tab">
+        <template>
+          <div class="page">
+            <slot name="{{tab}}"></slot>
+          </div>  
+        </template>
+      </dom-repeat>
+    </iron-pages>
+
+  </template>
+
+  <script>
+    /**
+     * `sp-tabbed-panel`
+     * example of a tabbed panel componet made for spreemo
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SpTabbedPanel extends Polymer.Element {
+      static get is() { return 'sp-tabbed-panel'; }
+      static get properties() {
+        return {
+          tabs: {
+            type: Array,
+            value: []
+          },
+          selected: {
+            type: String,
+            value: "0"
+          }
+        };
+      }
+    }
+
+    window.customElements.define(SpTabbedPanel.is, SpTabbedPanel);
+  </script>
+</dom-module>

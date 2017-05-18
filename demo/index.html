@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>sp-tabbed-panel demo</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../sp-tabbed-panel.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+    <style>
+      sp-tabbed-panel div img{
+        display: block;
+        margin: auto;
+      }
+
+      sp-tabbed-panel {
+        min-height: 270px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic sp-tabbed-panel demo</h3>
+      <demo-snippet>
+        <template>
+          <sp-tabbed-panel tabs='["Hello", "World", "Test"]'>
+            <div slot="Test">
+              <p> This is a test panel... please ignore</p>
+            </div>
+            <div slot="Hello">
+              <p> This is pannel one! we can put what ever we want in here! </p>
+            </div>
+            <div slot="World">
+              <img src="http://placebear.com/300/200">
+            </div>
+          </sp-tabbed-panel>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
