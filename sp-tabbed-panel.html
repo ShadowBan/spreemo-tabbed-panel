@@ -17,26 +17,26 @@
         color: white;
       }
 
-      .page {
+      .tab-pannel {
         padding: 10px;
       }
 
 
     </style>
     
-    <paper-tabs id="tabs" selected="{{selected}}">
-      <dom-repeat items="{{tabs}}" as="tab">
+    <paper-tabs id="tabs" selected="{{selected}}" attr-for-selected="name">
+      <dom-repeat items="[[tabs]]" as="tab">
         <template>
-          <paper-tab> {{tab}} </paper-tab> 
+          <paper-tab name="[[tab]]"> {{tab}} </paper-tab> 
         </template>
       </dom-repeat>
     </paper-tabs>
 
-    <iron-pages id="pages" selected="{{selected}}">
-      <dom-repeat items="{{tabs}}" as="tab">
+    <iron-pages id="pages" selected="{{selected}}" attr-for-selected="name">
+      <dom-repeat items="[[tabs]]" as="tab">
         <template>
-          <div class="page">
-            <slot name="{{tab}}"></slot>
+          <div name="[[tab]]" class="tab-pannel">
+            <slot name="[[tab]]"></slot>
           </div>  
         </template>
       </dom-repeat>
@@ -63,9 +63,25 @@
           },
           selected: {
             type: String,
-            value: "0"
+            observer: '_selectedChanged'
           }
         };
+      }
+
+      ready() {
+        super.ready();
+        this.selected = this._getDefaultTab();
+      }
+
+      _selectedChanged(newValue, oldValue){
+        window.location.hash = newValue;
+      }
+
+      _getDefaultTab(){
+        if(window.location.hash)
+          return window.location.hash.replace('#','');
+        else
+          return this.tabs[0];
       }
     }
 
